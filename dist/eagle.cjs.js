@@ -9,10 +9,13 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+var Vue = require('vue');
+var throttle = require('lodash.throttle');
 
-var Vue = _interopDefault(require('vue'));
-var throttle = _interopDefault(require('lodash.throttle'));
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Vue__default = /*#__PURE__*/_interopDefaultLegacy(Vue);
+var throttle__default = /*#__PURE__*/_interopDefaultLegacy(throttle);
 
 var PREV = 'prev';
 var NEXT = 'next';
@@ -199,7 +202,7 @@ var script = {
     },
     handleResize: function handleResize() {
       var self = this;
-      throttle(function () {
+      throttle__default['default'](function () {
         var width = 0;
         var height = 0;
 
@@ -229,7 +232,7 @@ var script = {
         }
       }
     },
-    handleWheel: throttle(function (evt) {
+    handleWheel: throttle__default['default'](function (evt) {
       if (this.mouseNavigation && this.currentSlide.mouseNavigation) {
         evt.preventDefault();
 
@@ -1584,7 +1587,7 @@ var main = {
     }
 
     if (extension.isWidget) {
-      Vue.component(extension.name, extension);
+      Vue__default['default'].component(extension.name, extension);
     }
   }
 };
