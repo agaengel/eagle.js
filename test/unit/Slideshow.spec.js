@@ -169,29 +169,42 @@ describe('Slideshow pre/next', () => {
 })
 
 describe('Slideshow events', () => {
-    const wrapper = mount(Slideshow, {
-        attachTo: document.getElementById('elem'),
-    })
-    const vm = wrapper.vm
+
 
     it('left arrow would perform prev', () => {
-        const spy = jest.spyOn(vm, 'previousStep')
-        wrapper.trigger('keydown.left')
+        const wrapper = mount(Slideshow, {
+            attachTo: document.getElementById('elem'),
+        })
+
+        const spy = jest.spyOn(wrapper.vm, 'previousStep')
+        wrapper.trigger('keydown', {
+            key: 'ArrowLeft'
+        })
         expect(spy).toHaveBeenCalled()
     })
 
-    it('right arrow would perform next', () => {
-        const spy = jest.spyOn(vm, 'nextStep')
-        wrapper.trigger('keydown.right')
+    it('right arrow would perform next', async () => {
+        const wrapper = mount(Slideshow, {
+            attachTo: document.getElementById('elem'),
+        })
+
+        const spy = jest.spyOn(wrapper.vm, 'nextStep')
+        wrapper.trigger('keydown', {
+            key: 'ArrowRight'
+        })
         expect(spy).toHaveBeenCalled()
     })
 
     it('wheel event is throttled', done => {
-        const spy = jest.spyOn(vm, 'nextStep')
-        wrapper.simulate('wheel', {
+        const wrapper = mount(Slideshow, {
+            attachTo: document.getElementById('elem'),
+        })
+
+        const spy = jest.spyOn(wrapper.vm, 'nextStep')
+        wrapper.trigger('wheel', {
             deltaY: 100
         })
-        wrapper.simulate('wheel', {
+        wrapper.trigger('wheel', {
             deltaY: 100
         })
 
