@@ -4,10 +4,14 @@ import Slideshow from '../fixtures/simpleSlideshow.vue'
 import ComplexSlideshow from '../fixtures/complexSlideshow.vue'
 
 let wrapper, vm
+const elem = document.createElement('div')
+if (document.body) {
+  document.body.appendChild(elem)
+}
 
 beforeEach(() => {
   wrapper = mount(Slideshow, {
-    attachToDocument: true
+    attachTo: elem
   })
   vm = wrapper.vm
 })
@@ -34,7 +38,7 @@ describe('Slideshow properties', () => {
 
   it('user set props matches', () => {
     wrapper = mount(Slideshow, {
-      attachToDocument: true,
+      attachTo: elem,
       propsData: {
         firstSlide: 2,
         startStep: 2,
@@ -62,7 +66,7 @@ describe('Slideshow properties', () => {
 
   it('props work in slideshow initialization', () => {
     wrapper = mount(Slideshow, {
-      attachToDocument: true,
+      attachTo: elem,
       propsData: {
         firstSlide: 2,
         startStep: 2,
@@ -99,7 +103,7 @@ describe('Slideshow lifecycle hooks', () => {
   it('should register default events when created', () => {
     jest.spyOn(window, 'addEventListener')
     wrapper = mount(Slideshow, {
-      attachToDocument: true
+      attachTo: elem
     })
 
     expect(window.addEventListener).toHaveBeenCalled()
@@ -116,7 +120,7 @@ describe('Slideshow lifecycle hooks', () => {
   it('should unregister events when destroyed', () => {
     jest.spyOn(window, 'removeEventListener')
     wrapper = mount(Slideshow, {
-      attachToDocument: true
+      attachTo: elem
     }).destroy()
 
     expect(window.removeEventListener).toHaveBeenCalled()
@@ -192,7 +196,7 @@ describe('Slideshow events', () => {
 describe('Slideshow back mode', () => {
   it('go back by slide would result to previous slide first step', async () => {
     wrapper = mount(ComplexSlideshow, {
-      attachToDocument: true,
+      attachTo: elem,
       propsData: {
         backBySlide: true
       }
@@ -224,7 +228,7 @@ describe('Slideshow back mode', () => {
 describe('Slideshow features', () => {
   it('repeat will navigate back to slide 1 when slideshow ends ', async () => {
     wrapper = mount(Slideshow, {
-      attachToDocument: true,
+      attachTo: elem,
       propsData: {
         firstSlide: 4,
         startStep: 4,
@@ -263,7 +267,7 @@ describe('Slideshow on mobile', () => {
     })
     jest.spyOn(window, 'addEventListener')
     wrapper = mount(Slideshow, {
-      attachToDocument: true
+      attachTo: elem
     })
 
     expect(window.addEventListener).toHaveBeenCalled()
