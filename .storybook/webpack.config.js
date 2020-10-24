@@ -14,7 +14,7 @@ module.exports = async ({config}) => {
         },
         {
             test: /\.(scss|css)$/,
-            use: ['vue-style-loader', 'css-loader', {
+            use: ['style-loader', 'css-loader', {
                 loader: 'sass-loader',
                 options: {
                     additionalData: '$sass-env: development;'
